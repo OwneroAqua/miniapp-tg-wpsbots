@@ -1,0 +1,55 @@
+document.addEventListener('DOMContentLoaded', function () {
+    const output = document.getElementById('output');
+
+    document.getElementById('weatherBtn').addEventListener('click', function () {
+        fetchData('/weather', 'Погода');
+    });
+
+    document.getElementById('newsBtn').addEventListener('click', function () {
+        fetchData('/news', 'Новости');
+    });
+
+    document.getElementById('currencyBtn').addEventListener('click', function () {
+        fetchData('/currency', 'Курс валют');
+    });
+
+    document.getElementById('jokeBtn').addEventListener('click', function () {
+        fetchData('/joke', 'Шутка');
+    });
+
+    document.getElementById('diceBtn').addEventListener('click', function () {
+        fetchData('/dice', 'Играть в кубик');
+    });
+
+    document.getElementById('balanceBtn').addEventListener('click', function () {
+        fetchData('/balance', 'Мой баланс');
+    });
+
+    document.getElementById('mineBtn').addEventListener('click', function () {
+        fetchData('/mine', 'Добыть монеты');
+    });
+
+    document.getElementById('numberBtn').addEventListener('click', function () {
+        fetchData('/number', 'Случайное число');
+    });
+
+    document.getElementById('timeBtn').addEventListener('click', function () {
+        fetchData('/time', 'Текущее время');
+    });
+
+    document.getElementById('whoamiBtn').addEventListener('click', function () {
+        fetchData('/whoami', 'Информация о боте');
+    });
+
+    function fetchData(endpoint, action) {
+        output.textContent = `Загрузка ${action}...`;
+        fetch(`https://api.yourbotdomain.com${endpoint}`)
+            .then(response => response.json())
+            .then(data => {
+                output.textContent = data.message || data;
+            })
+            .catch(error => {
+                output.textContent = `Ошибка: ${error.message}`;
+            });
+    }
+});
